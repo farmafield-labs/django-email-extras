@@ -4,7 +4,7 @@ from warnings import warn
 
 from django.template import loader
 from django.core.mail import EmailMultiAlternatives, get_connection
-from django.utils import six
+from six import string_types
 from django.utils.encoding import smart_text
 
 from email_extras.settings import (USE_GNUPG, GNUPG_HOME, ALWAYS_TRUST,
@@ -54,7 +54,7 @@ def send_mail(subject, body_text, addr_from, recipient_list,
         html_message = body_html
 
     # Allow for a single address to be passed in.
-    if isinstance(recipient_list, six.string_types):
+    if isinstance(recipient_list, string_types):
         recipient_list = [recipient_list]
 
     connection = connection or get_connection(
